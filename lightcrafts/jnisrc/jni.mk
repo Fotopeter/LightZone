@@ -17,6 +17,8 @@
 #
 # If the makefile needs to override the default settings, it can define:
 #
+JNI_EXTRA_INCLUDES:=		-I/usr/local/include -I$(JAVA_HOME)/include
+JNI_EXTRA_LDFLAGS:=		-L/usr/local/lib -L/$(JAVA_HOME)/lib
 #	JNI_EXTRA_CFLAGS	Specify extra flags to the compiler.
 #	JNI_EXTRA_DEFINES	Specify extra -D directives.
 #	JNI_EXTRA_INCLUDES	Specify extra -I directives.
@@ -120,7 +122,6 @@ ifeq ($(PLATFORM),Windows)
   JNI_EXTRA_DISTCLEAN+=	$(JNI_WINDOWS_DISTCLEAN)
 endif
 
-ifeq ($(PLATFORM),Linux)
   CFLAGS+= 		$(JNI_LINUX_CFLAGS)
   DEFINES+=		$(JNI_LINUX_DEFINES)
   INCLUDES+= 		$(JNI_LINUX_INCLUDES)
@@ -128,7 +129,6 @@ ifeq ($(PLATFORM),Linux)
   LINK+=		$(JNI_LINUX_LINK)
   JNI_EXTRA_CLEAN+=	$(JNI_LINUX_CLEAN)
   JNI_EXTRA_DISTCLEAN+=	$(JNI_LINUX_DISTCLEAN)
-endif
 
 ########## You shouldn't have to change anything below this line. #############
 

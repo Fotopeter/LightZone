@@ -32,7 +32,7 @@
   </condition>
 
   <target name="javac">
-    <exec executable="make" dir="products" failonerror="true"
+    <exec executable="gmake" dir="products" failonerror="true"
           vmlauncher="true"/>
 
     <mkdir dir="extbuild"/>
@@ -54,7 +54,7 @@
   </target>
 
   <target name="coprocesses">
-    <exec executable="make" dir="coprocesses" failonerror="true"
+    <exec executable="gmake" dir="coprocesses" failonerror="true"
           vmlauncher="true">
       <arg value="USE_ICC=${USE_ICC}"/>
       <arg value="UNIVERSAL=${UNIVERSAL}"/>
@@ -85,7 +85,7 @@
   </target>
 
   <target name="jni">
-    <exec executable="make" dir="jnisrc" failonerror="true" vmlauncher="true">
+    <exec executable="gmake" dir="jnisrc" failonerror="true" vmlauncher="true">
       <arg value="USE_ICC=${USE_ICC}"/>
       <arg value="UNIVERSAL=${UNIVERSAL}"/>
     </exec>
@@ -189,13 +189,13 @@
   <target name="clean-up">
     <delete dir="build"/>
     <delete dir="extbuild"/>
-    <exec executable="make" dir="jnisrc">
+    <exec executable="gmake" dir="jnisrc">
       <arg value="${clean-method}"/>
     </exec>
-    <exec executable="make" dir="coprocesses">
+    <exec executable="gmake" dir="coprocesses">
       <arg value="${clean-method}"/>
     </exec>
-    <exec executable="make" dir="products">
+    <exec executable="gmake" dir="products">
       <arg value="${clean-method}"/>
     </exec>
     <ant dir="test" target="${clean-method}"/>

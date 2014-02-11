@@ -7,6 +7,10 @@ TARGET_BASE:=		dcraw
 #DEBUG:=		true
 
 EXEC_EXTRA_DEFINES:=	-DNODEPS -DLIGHTZONE
+EXEC_EXTRA_INCLUDES:=	-I/usr/local/include -I/usr/local/include/jasper
+EXEC_EXTRA_LDFLAGS:=		-L/usr/local/lib 
+EXEC_EXTRA_LINK:=	-lm -ljasper -ljpeg -llcms
+
 EXEC_LINUX_DEFINES:=	-Dfgetc=getc_unlocked
 EXEC_MACOSX_DEFINES:=	$(EXEC_LINUX_DEFINES)
 EXEC_WINDOWS_DEFINES:=	-DDJGPP

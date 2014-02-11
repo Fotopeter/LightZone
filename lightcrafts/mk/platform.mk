@@ -35,8 +35,8 @@ TOOLS_BIN:=		$(abspath $(ROOT)/lightcrafts/tools/bin)
 CLASSPATH_SEP:=		:
 
 # The default C and C++ compilers.
-CC:=			gcc
-CXX:=			g++
+CC:=			gcc46
+CXX:=			g++46
 
 # Unset USE_ICC_HERE if the overall USE_ICC flags != 1.
 ifneq ($(USE_ICC),1)
@@ -44,7 +44,8 @@ ifneq ($(USE_ICC),1)
 endif
 
 # The initial set of CFLAGS.  (Must not use := here!)
-PLATFORM_CFLAGS=	-g
+PLATFORM_CFLAGS=	-I/usr/local/openjdk6/include -I/usr/local/openjdk6/include/freebsd -I/usr/local/include/gcc46 -fPIC
+PLATFORM_LDFLAGS=	-L/usr/local/lib/gcc46 -lstdc++ 
 
 # Default symlink command.  This needs to be defined as a function variable
 # rather than just a simple variable because of the way it's overridden for
@@ -246,7 +247,6 @@ endif
 ##
 # Linux
 ##
-ifeq ($(PLATFORM),Linux)
   ifeq ($(PROCESSOR),x86_64)
     PLATFORM_CFLAGS+=	-march=athlon64 -mtune=generic $(SSE_FLAGS_ON) -fPIC
   else
@@ -261,15 +261,14 @@ ifeq ($(PLATFORM),Linux)
   else
     PLATFORM_CFLAGS+=	-Os
   endif
-  JAVA_INCLUDES:=	-I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux
+  JAVA_INCLUDES:=	-I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/freebsd
   JAVA_LDFLAGS:=	-L$(JAVA_HOME)/lib
   JNILIB_PREFIX:=	lib
   JNILIB_EXT:=		.so
   DYLIB_PREFIX:=	$(JNILIB_PREFIX)
   DYLIB_EXT:=		$(JNILIB_EXT)
 
-  NUM_PROCESSORS:=	$(shell grep '^processor' /proc/cpuinfo | wc -l)
-endif
+  NUM_PROCESSORS:=	4
 
 ##
 # Miscellaneous stuff.

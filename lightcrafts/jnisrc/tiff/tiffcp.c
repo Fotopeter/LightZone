@@ -36,7 +36,7 @@
  * OF THIS SOFTWARE.
  */
 
-#include "tif_config.h"
+#include "tiffconf.h"
 
 #include <stdio.h>
 #include <stdlib.h>
